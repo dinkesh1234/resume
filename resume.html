@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Johnson - Elite Software Developer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            --accent-color: #6c5ce7;
+            --text-primary: #2d3436;
+            --text-secondary: #636e72;
+            --surface: #ffffff;
+            --surface-elevated: #f8f9fa;
+            --border-color: #e9ecef;
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--surface);
+            border-radius: 24px;
+            box-shadow: var(--shadow-heavy);
+            overflow: hidden;
+            position: relative;
+            animation: containerEntry 1.2s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        @keyframes containerEntry {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero-section {
+            background: var(--dark-gradient);
+            color: white;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23667eea" stop-opacity="0.1"/><stop offset="100%" stop-color="%23764ba2" stop-opacity="0.05"/></radialGradient></defs><circle cx="200" cy="200" r="300" fill="url(%23a)"/><circle cx="800" cy="800" r="400" fill="url(%23a)"/></svg>') no-repeat center;
+            background-size: cover;
+            animation: heroFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            animation: badgeGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes badgeGlow {
+            0% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+            100% { box-shadow: 0 0 30px rgba(102, 126, 234, 0.6); }
+        }
+
+        .hero-name {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #ffffff 0%, #a8e6cf 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes textShimmer {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2); }
+        }
+
+        .hero-title {
+            font-size: 1.5rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-contact {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 1.2rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            min-height: 800px;
+        }
+
+        .sidebar {
+            background: var(--surface-elevated);
+            padding: 50px 40px;
+            border-right: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--accent-color), transparent);
+        }
+
+        .content-area {
+            padding: 50px 40px;
+            background: var(--surface);
+        }
+
+        .section {
+            margin-bottom: 50px;
+            animation: sectionSlide 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes sectionSlide {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: var(--secondary-gradient);
+            border-radius: 2px;
+        }
+
+        .language-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .language-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .language-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(108, 92, 231, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .language-card:hover::before {
+            left: 100%;
+        }
+
+        .language-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--accent-color);
+        }
+
+        .language-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .language-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .language-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .language-level {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+            position: relative;
+            animation: progressFill 2s ease-out forwards;
+            transform-origin: left;
+        }
+
+        @keyframes progressFill {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progressShine 2s ease-in-out infinite;
+        }
+
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .html-progress { width: 95%; }
+        .css-progress { width: 92%; }
+        .c-progress { width: 88%; }
+        .cpp-progress { width: 90%; }
+
+        .skills-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background: #f8f9ff;
+            border-color: var(--accent-color);
+            transform: translateX(4px);
+        }
+
+        .skill-name {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .skill-level {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: #e8f4fd;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .experience-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary-gradient);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .experience-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-heavy);
+            border-color: transparent;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .experience-company {
+            font-size: 1rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .experience-date {
+            background: var(--surface-elevated);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+        }
+
+        .experience-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .experience-description li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .experience-description li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.05) 0%, transparent 70%);
+            transition: all 0.4s ease;
+            opacity: 0;
+        }
+
+        .project-card:hover::after {
+            opacity: 1;
+            top: -25%;
+            right: -25%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(108, 92, 231, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .project-tech {
+            background: var(--accent-color);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+        }
+
+        .code-block::before {
+            content: attr(data-lang);
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .code-content {
+            color: #e8e8e8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        .download-section {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .download-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .circle-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: -10s;
+        }
+
+        .circle-3 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-30px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(30px) rotate(240deg);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-name {
+                font-size: 3rem;
+            }
+            
+            .hero-contact {
+                flex-direction: column;
+                gap: 16px;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 16px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .hero-section {
+                padding: 40px 20px;
+            }
+            
+            .sidebar, .content-area {
+                padding: 30px 20px;
+            }
+            
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
+    </div>
+
+    <div class="container">
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="hero-badge">✨ Available for Opportunities</div>
+                <h1 class="hero-name">Alex Johnson</h1>
+                <p class="hero-title">Elite Software Developer & Systems Architect</p>
+                
+                <div class="hero-contact">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <span>alex.johnson@email.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🌐</span>
+                        <span>github.com/alexjohnson</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <span>San Francisco, CA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-grid">
+            <aside class="sidebar">
+                <section class="section">
+                    <h3 class="section-title">Programming Languages</h3>
+                    <div class="language-grid">
+                        <div class="language-card">
+                            <div class="language-header">
+                                <div class="language-icon">🌐</div>
+                                <div class="language-name">HTML5</div>
+                            </div>
+                            <div class="language-level">Advanced • 5+ years</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill html-progress"></div>
+                            </div>
+                        </div>
+
+                        <div class="language-card">
+                            <div class="language-header">
+                                <div class="language-icon">🎨</div>
+                                <div class="language-name">CSS3</div>
+                            </div>
+                            <div class="language-level">Advanced • 5+ years</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill css-progress"></div>
+                            </div>
+                        </div>
+
+                        <div class="language-card">
+                            <div class="language-header">
+                                <div class="language-icon">⚡</div>
+                                <div class="language-name">C</div>
+                            </div>
+                            <div class="language-level">Expert • 4+ years</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill c-progress"></div>
+                            </div>
+                        </div>
+
+                        <div class="language-card">
+                            <div class="language-header">
+                                <div class="language-icon">🚀</div>
+                                <div class="language-name">C++</div>
+                            </div>
+                            <div class="language-level">Expert • 4+ years</div>
+                            <div class="progress-bar">
+                                <div class="progress-fill cpp-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h3 class="section-title">Core Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <span class="skill-name">Algorithm Design</span>
+                            <span class="skill-level">Expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">System Architecture</span>
+                            <span class="skill-level">Advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Performance Optimization</span>
+                            <span class="skill-level">Expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Memory Management</span>
+                            <span class="skill-level">Advanced</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Responsive Design</span>
+                            <span class="skill-level">Expert</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Code Review</span>
+                            <span class="skill-level">Advanced</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h3 class="section-title">Certifications</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <span class="skill-name">C++ Certified Professional</span>
+                            <span class="skill-level">2023</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Advanced Web Development</span>
+                            <span class="skill-level">2022</span>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">System Design Expert</span>
+                            <span class="skill-level">2023</span>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <main class="content-area">
+                <section class="section">
+                    <h3 class="section-title">Professional Summary</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 20px;">
+                        Elite software developer with 5+ years of experience crafting high-performance applications and elegant web solutions. 
+                        Specialized in systems programming with C/C++ and modern web technologies. Proven track record of optimizing critical 
+                        systems, leading technical teams, and delivering scalable solutions for Fortune 500 companies.
+                    </p>
+                    <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);">
+                        Passionate about clean architecture, performance optimization, and mentoring the next generation of developers. 
+                        Combines deep technical expertise with strong leadership skills to drive innovation and excellence.
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h3 class="section-title">Professional Experience</h3>
+                    
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Senior Software Architect</div>
+                                <div class="experience-company">TechCorp Solutions</div>
+                            </div>
+                            <div class="experience-date">2022 - Present</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Architected and developed high-performance C++ applications processing 10M+ transactions daily</li>
+                            <li>Led the frontend modernization initiative, migrating legacy systems to responsive HTML5/CSS3 interfaces</li>
+                            <li>Optimized critical algorithms achieving 60% performance improvement and $2M annual cost savings</li>
+                            <li>Mentored 8 junior developers and established coding standards adopted company-wide</li>
+                            <li>Designed microservices architecture serving 100K+ concurrent users with 99.9% uptime</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Lead Software Developer</div>
+                                <div class="experience-company">InnovateTech Labs</div>
+                            </div>
+                            <div class="experience-date">2020 - 2022</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Developed cross-platform applications using modern C++ standards (C++17/20)</li>
+                            <li>Created award-winning responsive web applications with advanced CSS animations</li>
+                            <li>Implemented real-time data processing systems handling 1TB+ daily throughput</li>
+                            <li>Collaborated with UX teams to deliver pixel-perfect, accessible user interfaces</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Software Developer</div>
+                                <div class="experience-company">StartupXYZ</div>
+                            </div>
+                            <div class="experience-date">2019 - 2020</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Built foundational systems using C for embedded and IoT applications</li>
+                            <li>Developed responsive web interfaces with focus on performance and accessibility</li>
+                            <li>Participated in agile development processes and continuous integration pipelines</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h3 class="section-title">Featured Projects</h3>
+                    
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Advanced Memory Pool Allocator</div>
+                            <div class="project-tech">C++</div>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                            Enterprise-grade memory management system with automatic defragmentation and thread-safe operations.
+                            Reduced memory fragmentation by 85% and improved allocation speed by 300%.
+                        </p>
+                        <div class="code-block" data-lang="C++">
+                            <div class="code-content">
+template&lt;typename T, size_t BlockSize = 4096&gt;
+class AdvancedMemoryPool {
+private:
+    struct Block {
+        alignas(T) char data[sizeof(T)];
+        Block* next;
+        std::atomic&lt;bool&gt; is_free{true};
+    };
+    
+    std::unique_ptr&lt;Block[]&gt; pool;
+    std::atomic&lt;Block*&gt; free_list;
+    std::atomic&lt;size_t&gt; allocated_count{0};
+    
+public:
+    AdvancedMemoryPool() : pool(std::make_unique&lt;Block[]&gt;(BlockSize)) {
+        initialize_free_list();
+    }
+    
+    T* allocate() noexcept {
+        Block* block = free_list.load();
+        while (block && !free_list.compare_exchange_weak(block, block->next)) {
+            block = free_list.load();
+        }
+        
+        if (block) {
+            block->is_free.store(false);
+            allocated_count.fetch_add(1);
+            return reinterpret_cast&lt;T*&gt;(block->data);
+        }
+        return nullptr;
+    }
+    
+    void deallocate(T* ptr) noexcept {
+        if (!ptr) return;
+        
+        Block* block = reinterpret_cast&lt;Block*&gt;(ptr);
+        block->is_free.store(true);
+        
+        Block* head = free_list.load();
+        do {
+            block->next = head;
+        } while (!free_list.compare_exchange_weak(head, block));
+        
+        allocated_count.fetch_sub(1);
+    }
+};</div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Ultra-Responsive Design Framework</div>
+                            <div class="project-tech">CSS3</div>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                            Next-generation CSS framework with advanced grid systems, fluid typography, and GPU-accelerated animations.
+                            Adopted by 50+ companies for their design systems.
+                        </p>
+                        <div class="code-block" data-lang="CSS">
+                            <div class="code-content">
+/* Advanced Fluid Grid System */
+.ultra-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+    gap: clamp(1rem, 4vw, 3rem);
+    padding: clamp(1rem, 5vw, 4rem);
+}
+
+/* GPU-Accelerated Animations */
+@keyframes morphTransform {
+    0% {
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    50% {
+        transform: perspective(1000px) rotateX(180deg) rotateY(90deg) scale3d(1.1, 1.1, 1.1);
+        filter: hue-rotate(180deg) brightness(1.2);
+    }
+    100% {
+        transform: perspective(1000px) rotateX(360deg) rotateY(180deg) scale3d(1, 1, 1);
+        filter: hue-rotate(360deg) brightness(1);
+    }
+}
+
+/* Intelligent Container Queries */
+.adaptive-component {
+    container-type: inline-size;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@container (min-width: 400px) {
+    .adaptive-component {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+    }
+}
+
+/* Advanced Typography Scale */
+.fluid-text {
+    font-size: clamp(1rem, 2.5vw + 0.5rem, 3rem);
+    line-height: calc(1em + 0.5rem);
+    letter-spacing: calc(-0.01em * (1vw + 1vh));
+}</div>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <div class="project-title">Real-Time System Monitor</div>
+                            <div class="project-tech">C</div>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                            High-performance system monitoring tool with real-time metrics, process management, and network analysis.
+                            Deployed across 1000+ servers in production environments.
+                        </p>
+                        <div class="code-block" data-lang="C">
+                            <div class="code-content">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/sysinfo.h&gt;
+#include &lt;sys/resource.h&gt;
+#include &lt;pthread.h&gt;
+
+typedef struct {
+    pid_t pid;
+    char name[256];
+    double cpu_usage;
+    long memory_usage;
+    long io_read;
+    long io_write;
+    time_t start_time;
+} ProcessMetrics;
+
+typedef struct {
+    ProcessMetrics* processes;
+    size_t count;
+    size_t capacity;
+    pthread_mutex_t mutex;
+} ProcessTable;
+
+static ProcessTable g_process_table = {0};
+
+void* monitor_thread(void* arg) {
+    struct sysinfo info;
+    FILE* stat_file;
+    char buffer[1024];
+    
+    while (1) {
+        sysinfo(&info);
+        
+        pthread_mutex_lock(&g_process_table.mutex);
+        
+        // Update system metrics
+        printf("\\033[2J\\033[H"); // Clear screen
+        printf("=== SYSTEM MONITOR ===\\n");
+        printf("Uptime: %ld seconds\\n", info.uptime);
+        printf("Load Average: %.2f %.2f %.2f\\n", 
+               info.loads[0]/65536.0, 
+               info.loads[1]/65536.0, 
+               info.loads[2]/65536.0);
+        printf("Memory: %ld/%ld MB (%.1f%% used)\\n",
+               (info.totalram - info.freeram) / 1024 / 1024,
+               info.totalram / 1024 / 1024,
+               ((double)(info.totalram - info.freeram) / info.totalram) * 100);
+        
+        // Process monitoring
+        scan_processes(&g_process_table);
+        display_top_processes(&g_process_table, 10);
+        
+        pthread_mutex_unlock(&g_process_table.mutex);
+        
+        sleep(1);
+    }
+    
+    return NULL;
+}
+
+int main() {
+    pthread_t monitor_tid;
+    
+    // Initialize process table
+    g_process_table.capacity = 1024;
+    g_process_table.processes = malloc(sizeof(ProcessMetrics) * g_process_table.capacity);
+    pthread_mutex_init(&g_process_table.mutex, NULL);
+    
+    // Start monitoring thread
+    pthread_create(&monitor_tid, NULL, monitor_thread, NULL);
+    
+    // Main thread handles user input
+    char command[256];
+    while (fgets(command, sizeof(command), stdin)) {
+        if (strncmp(command, "quit", 4) == 0) break;
+        // Handle other commands...
+    }
+    
+    pthread_cancel(monitor_tid);
+    pthread_join(monitor_tid, NULL);
+    
+    free(g_process_table.processes);
+    pthread_mutex_destroy(&g_process_table.mutex);
+    
+    return 0;
+}</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <h3 class="section-title">Education & Achievements</h3>
+                    
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Master of Science in Computer Science</div>
+                                <div class="experience-company">Stanford University</div>
+                            </div>
+                            <div class="experience-date">2017 - 2019</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Specialized in Systems Programming and High-Performance Computing</li>
+                            <li>Thesis: "Advanced Memory Management Techniques for Real-Time Systems"</li>
+                            <li>GPA: 3.9/4.0 • Dean's List • Research Assistant</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Bachelor of Science in Computer Engineering</div>
+                                <div class="experience-company">UC Berkeley</div>
+                            </div>
+                            <div class="experience-date">2013 - 2017</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Summa Cum Laude • Phi Beta Kappa Honor Society</li>
+                            <li>Captain of Programming Competition Team (ACM ICPC Regional Winners)</li>
+                            <li>Outstanding Senior Project Award for "Distributed Computing Framework"</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <div class="download-section">
+                    <h3 style="margin-bottom: 20px; color: var(--text-primary);">Ready to Connect?</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px; font-size: 1.1rem;">
+                        Let's discuss how I can contribute to your next breakthrough project.
+                    </p>
+                    <button class="download-btn" onclick="downloadResume()">
+                        <span>📄</span>
+                        Download Complete Resume
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Advanced animations and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections
+            document.querySelectorAll('.section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Advanced hover effects for language cards
+            document.querySelectorAll('.language-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                    this.style.boxShadow = '0 20px 40px rgba(108, 92, 231, 0.2)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                    this.style.boxShadow = 'var(--shadow-light)';
+                });
+            });
+
+            // Parallax effect for floating elements
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = document.querySelectorAll('.floating-circle');
+                const speed = 0.5;
+
+                parallax.forEach(element => {
+                    const yPos = -(scrolled * speed);
+                    element.style.transform = `translateY(${yPos}px)`;
+                });
+            });
+
+            // Smooth reveal animation for code blocks
+            const codeBlocks = document.querySelectorAll('.code-block');
+            codeBlocks.forEach(block => {
+                block.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.02)';
+                    this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.3)';
+                });
+                
+                block.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+
+            // Dynamic progress bar animations
+            setTimeout(() => {
+                document.querySelectorAll('.progress-fill').forEach(bar => {
+                    bar.style.animationDelay = Math.random() * 0.5 + 's';
+                });
+            }, 500);
+        });
+
+        function downloadResume() {
+            const resumeContent = `
+ALEX JOHNSON - ELITE SOFTWARE DEVELOPER & SYSTEMS ARCHITECT
+Email: alex.johnson@email.com | Phone: +1 (555) 123-4567
+GitHub: github.com/alexjohnson | Location: San Francisco, CA
+
+PROGRAMMING LANGUAGES:
+• HTML5 - Advanced (5+ years) - Semantic markup, accessibility, modern standards
+• CSS3 - Advanced (5+ years) - Grid, Flexbox, animations, responsive design
+• C - Expert (4+ years) - Systems programming, embedded development, performance optimization
+• C++ - Expert (4+ years) - Modern C++17/20, template metaprogramming, STL mastery
+
+CORE SKILLS:
+• Algorithm Design - Expert
+• System Architecture - Advanced  
+• Performance Optimization - Expert
+• Memory Management - Advanced
+• Responsive Design - Expert
+• Code Review - Advanced
+
+PROFESSIONAL EXPERIENCE:
+
+Senior Software Architect | TechCorp Solutions | 2022 - Present
+• Architected high-performance C++ applications processing 10M+ transactions daily
+• Led frontend modernization to responsive HTML5/CSS3 interfaces
+• Optimized algorithms achieving 60% performance improvement, $2M annual savings
+• Mentored 8 developers, established company-wide coding standards
+• Designed microservices architecture serving 100K+ concurrent users (99.9% uptime)
+
+Lead Software Developer | InnovateTech Labs | 2020 - 2022
+• Developed cross-platform applications using modern C++ standards (C++17/20)
+• Created award-winning responsive web applications with advanced CSS animations
+• Implemented real-time data processing systems handling 1TB+ daily throughput
+• Collaborated with UX teams for pixel-perfect, accessible interfaces
+
+Software Developer | StartupXYZ | 2019 - 2020
+• Built foundational systems using C for embedded and IoT applications
+• Developed responsive web interfaces focused on performance and accessibility
+• Participated in agile development and continuous integration pipelines
+
+FEATURED PROJECTS:
+• Advanced Memory Pool Allocator (C++) - Enterprise-grade memory management, 85% fragmentation reduction
+• Ultra-Responsive Design Framework (CSS3) - Next-gen framework adopted by 50+ companies
+• Real-Time System Monitor (C) - High-performance monitoring tool deployed on 1000+ servers
+
+EDUCATION:
+Master of Science in Computer Science | Stanford University | 2017 - 2019
+• Specialized in Systems Programming and High-Performance Computing
+• Thesis: "Advanced Memory Management Techniques for Real-Time Systems"
+• GPA: 3.9/4.0, Dean's List, Research Assistant
+
+Bachelor of Science in Computer Engineering | UC Berkeley | 2013 - 2017
+• Summa Cum Laude, Phi Beta Kappa Honor Society
+• ACM ICPC Regional Winners (Team Captain)
+• Outstanding Senior Project Award
+
+CERTIFICATIONS:
+• C++ Certified Professional (2023)
+• Advanced Web Development (2022)
+• System Design Expert (2023)
+            `;
+
+            const blob = new Blob([resumeContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Alex_Johnson_Elite_Resume.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Show success message
+            const btn = document.querySelector('.download-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>✅</span> Downloaded Successfully!';
+            btn.style.background = 'linear-gradient(135deg, #00b894, #00a085)';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = 'var(--primary-gradient)';
+            }, 2000);
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'973c2bc902b54e3d',t:'MTc1NTk2ODQ3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
